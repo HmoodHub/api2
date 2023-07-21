@@ -35,6 +35,7 @@ class CategoryScreen extends StatelessWidget {
           ],
         ),
       ),
+      // How are you ?
     );
   }
 
