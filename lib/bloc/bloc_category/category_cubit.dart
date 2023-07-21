@@ -23,10 +23,10 @@ class CategoryCubit extends Cubit<CategoryState> {
 
   late String data;
   void initCategory(){
-    token = StorageApp().dataSave(KeysStore.token.toString())??'NO';
-    name = StorageApp().dataSave(KeysStore.name.toString())??'NO';
-    email = StorageApp().dataSave(KeysStore.email.toString())??'NO';
-    gender = StorageApp().dataSave(KeysStore.gender.toString())??'NO';
+    token = StorageApp().readSecureData(KeysStore.token.toString());
+    name = StorageApp().readSecureData(KeysStore.name.toString());
+    email = StorageApp().readSecureData(KeysStore.email.toString());
+    gender = StorageApp().readSecureData(KeysStore.gender.toString());
     data = '';
   }
 

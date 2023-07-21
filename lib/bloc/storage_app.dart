@@ -1,15 +1,25 @@
-import 'package:get_storage/get_storage.dart';
+import 'package:api2/model/storage_model.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
+class StorageApp {
+  final _storage = const FlutterSecureStorage();
 
+  AndroidOptions _getAndroidOptions() => const AndroidOptions(
+        encryptedSharedPreferences: true,
+      );
 
-
-class StorageApp{
-  final _storage = GetStorage();
-  saveData(dynamic value, String key)async{
-    await _storage.write(key, value);
+  Future<void> writeSecureData(StorageModel newItem) async {
+    await _storage.write(
+        key: newItem.key, value: newItem.value, aOptions: _getAndroidOptions());
   }
-  dynamic dataSave(String key){
-    return  _storage.read(key);
+
+  readSecureData(String key) async {
+    var readData =
+        await _storage.read(key: key, aOptions: _getAndroidOptions());
+    return readData;
   }
 
+  Future<void> deleteAllSecureData() async {
+    await _storage.deleteAll(aOptions: _getAndroidOptions());
+  }
 }

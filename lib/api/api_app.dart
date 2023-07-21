@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:api2/api/api_controller.dart';
 import 'package:api2/model/AuthModel.dart';
+import 'package:api2/model/storage_model.dart';
 import 'package:api2/widget/wedget.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -53,7 +54,8 @@ class ApiApp {
         state: Colors.green,
         gravity: Toast.bottom,
       );
-      StorageApp().saveData(jsonDecode(response.body)['status'], KeysStore.login.toString());
+      StorageModel storageModel = StorageModel(jsonDecode(response.body)['status'], KeysStore.login.toString());
+      StorageApp().writeSecureData(storageModel);
       return true;
     } else if (response.statusCode == 400) {
       toastMessage(

@@ -6,14 +6,13 @@ import 'package:api2/widget/const_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+
 
 import 'bloc/bloc_obsearvable.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
-  await GetStorage.init();
   runApp(const MyApp());
   Future.delayed(const Duration(seconds: 5),(){
     print(token);
