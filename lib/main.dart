@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
           create: (context) => LoginCubit()..initState(),
         ),
         BlocProvider(
-          create: (context) => CategoryCubit()..initCategory(),
+          create: (context) => CategoryCubit(),
         ),
       ],
       child: GetMaterialApp(

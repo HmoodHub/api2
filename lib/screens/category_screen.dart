@@ -26,12 +26,10 @@ class CategoryScreen extends StatelessWidget {
           children: [
             GFButton(
               onPressed: () {
-                bloc.setData();
               },
               text: 'Print User Data',
               size: GFSize.LARGE,
             ),
-            Text(bloc.data),
           ],
         ),
       ),

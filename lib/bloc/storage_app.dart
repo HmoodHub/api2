@@ -1,25 +1,47 @@
-import 'package:api2/model/storage_model.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
+import 'package:shared_preferences/shared_preferences.dart';
 
 class StorageApp {
-  final _storage = const FlutterSecureStorage();
 
-  AndroidOptions _getAndroidOptions() => const AndroidOptions(
-        encryptedSharedPreferences: true,
-      );
+   SharedPreferences? _pref;
 
-  Future<void> writeSecureData(StorageModel newItem) async {
-    await _storage.write(
-        key: newItem.key, value: newItem.value, aOptions: _getAndroidOptions());
-  }
+   //// SET DATA SHEARED PREF
+   setDataString(String key, String value)async{
+     _pref = await SharedPreferences.getInstance();
+     _pref?.setString(key, value);
+   }
+   setDataBool(String key, bool value)async{
+     _pref = await SharedPreferences.getInstance();
+     _pref?.setBool(key, value);
+   }
+   setDataDouble(String key, double value)async{
+     _pref = await SharedPreferences.getInstance();
+     _pref?.setDouble(key, value);
+   }
+   setDataInt(String key, int value)async{
+     _pref = await SharedPreferences.getInstance();
+     _pref?.setInt(key, value);
+   }
+   setDataListOfString(String key, List<String> value)async{
+     _pref = await SharedPreferences.getInstance();
+     _pref?.setStringList(key, value);
+   }
 
-  readSecureData(String key) async {
-    var readData =
-        await _storage.read(key: key, aOptions: _getAndroidOptions());
-    return readData;
-  }
+   setData(String key, dynamic value)async{
+     _pref = await SharedPreferences.getInstance();
+     if (value is int) _pref?.setInt(key, value);
+     if (value is String) _pref?.setString(key, value);
+     if (value is double) _pref?.setDouble(key, value);
+     if (value is bool) _pref?.setBool(key, value);
+     if (value is List<String>) _pref?.setStringList(key, value);
+   }
 
-  Future<void> deleteAllSecureData() async {
-    await _storage.deleteAll(aOptions: _getAndroidOptions());
-  }
+
+
+   //// GET DATA SHEARED PREF
+   getDataString(String key)async{
+     _pref = await SharedPreferences.getInstance();
+     _pref?.get(key);
+   }
+
 }

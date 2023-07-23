@@ -54,8 +54,6 @@ class ApiApp {
         state: Colors.green,
         gravity: Toast.bottom,
       );
-      StorageModel storageModel = StorageModel(jsonDecode(response.body)['status'], KeysStore.login.toString());
-      StorageApp().writeSecureData(storageModel);
       return true;
     } else if (response.statusCode == 400) {
       toastMessage(

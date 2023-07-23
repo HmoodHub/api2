@@ -55,16 +55,6 @@ class LoginCubit extends Cubit<LoginState> {
     try{
       bool isLogin = await ApiApp.login(emailController.text.trim(), passController.text.trim(), context, user);
       if (isLogin) {
-          if (user != null) {
-            store = StorageModel(user.token, KeysStore.token.toString());
-            StorageApp().writeSecureData(store);
-            store = StorageModel(user.fullName, KeysStore.token.toString());
-            StorageApp().writeSecureData(store);
-            store = StorageModel(user.email, KeysStore.token.toString());
-            StorageApp().writeSecureData(store);
-            store = StorageModel(user.gender, KeysStore.token.toString());
-            StorageApp().writeSecureData(store);
-          }
         Get.off(() => const CategoryScreen());
       }
       emit(LoginSuccess());
