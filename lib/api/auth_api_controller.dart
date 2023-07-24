@@ -79,6 +79,7 @@ class AuthApiController {
     var url = Uri.parse(ApiController.logoutURL);
     var response = await http.get(url, headers: {
       HttpHeaders.authorizationHeader : SharedPrfController().tokenApp,
+      HttpHeaders.acceptHeader : 'application/json'
     });
     if (response.statusCode == 200 || response.statusCode == 401) {
       await SharedPrfController().clear();
