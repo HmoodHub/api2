@@ -5,4 +5,6 @@ class ApiController{
   static const categoryURL = '${_apiURL}categories';
   static const loginURL = '${_apiURL}students/auth/login';
   static const registerURL = '${_apiURL}students/auth/register';
+
+  static const logoutURL = '${_apiURL}students/auth/logout';
 }

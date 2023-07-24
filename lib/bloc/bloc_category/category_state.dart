@@ -20,3 +20,4 @@ class CategoryError extends CategoryState {
 }
 class SaveUserData extends CategoryState {}
 class SetData extends CategoryState{}
+class Logout extends CategoryState{}

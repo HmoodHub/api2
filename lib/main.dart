@@ -1,7 +1,9 @@
 import 'package:api2/bloc/bloc_category/category_cubit.dart';
 import 'package:api2/bloc/bloc_login/login_cubit.dart';
 import 'package:api2/bloc/bloc_register/register_cubit.dart';
+import 'package:api2/prefs/sheared_pref_controller.dart';
 import 'package:api2/screens/auth/login_screen.dart';
+import 'package:api2/screens/category_screen.dart';
 import 'package:api2/widget/const_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,10 +15,8 @@ import 'bloc/bloc_obsearvable.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
+  await SharedPrfController().initPref();
   runApp(const MyApp());
-  Future.delayed(const Duration(seconds: 5),(){
-    print(token);
-  });
 }
 
 class MyApp extends StatelessWidget {
@@ -35,12 +35,12 @@ class MyApp extends StatelessWidget {
           create: (context) => LoginCubit()..initState(),
         ),
         BlocProvider(
-          create: (context) => CategoryCubit(),
+          create: (context) => CategoryCubit()..init(),
         ),
       ],
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        home: LoginScreen(),
+        home: SharedPrfController().loggedIn ? const CategoryScreen() : LoginScreen(),
       ),
     );
   }

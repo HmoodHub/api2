@@ -80,8 +80,14 @@ class RegisterScreen extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    const Text('Gender: ',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
-                    const SizedBox(width: 20,),
+                    const Text(
+                      'Gender: ',
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
                     Expanded(
                       child: RadioListTile(
                         contentPadding: EdgeInsets.zero,
@@ -112,29 +118,35 @@ class RegisterScreen extends StatelessWidget {
                 GFButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                     bloc.registerApp(context);
+                      bloc.registerApp(context);
                     }
                   },
-                  text: 'Login',
+                  text: 'Register',
                   size: GFSize.LARGE,
                 ),
                 const SizedBox(
                   height: 10,
                 ),
-                RichText(
-                  text: TextSpan(
-                    text: 'Do have an account?',
-                    style: const TextStyle(color: Colors.black),
-                    children: [
-                      TextSpan(
-                        text: ' Login',
-                        style: const TextStyle(color: Colors.blue),
-                        recognizer: bloc.recognizer,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Do have an account?',
+                      style: const TextStyle(color: Colors.black),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Get.to(LoginScreen());
+                      },
+                      child: Text(
+                        ' Login',
+                        style: TextStyle(
+                          color: Colors.blue,
+                        ),
                       ),
-                    ],
-                  ),
-                  textAlign: TextAlign.center,
-                ),
+                    ),
+                  ],
+                )
               ],
             ),
           ),

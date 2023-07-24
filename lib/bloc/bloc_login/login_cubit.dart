@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:api2/api/api_app.dart';
 import 'package:api2/api/api_controller.dart';
+import 'package:api2/api/auth_api_controller.dart';
 import 'package:api2/model/AuthModel.dart';
 import 'package:api2/model/storage_model.dart';
 import 'package:api2/screens/auth/register_screen.dart';
@@ -13,8 +13,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:meta/meta.dart';
 
-import '../../screens/category_screen.dart';
-import '../storage_app.dart';
+
 
 part 'login_state.dart';
 
@@ -47,17 +46,13 @@ class LoginCubit extends Cubit<LoginState> {
     emit(LoginVisibilityPass());
   }
 
-  ObjectUser user = ObjectUser();
-  late StorageModel store ;
-
   void loginApp(context)async{
     emit(LoginLoading());
     try{
-      bool isLogin = await ApiApp.login(emailController.text.trim(), passController.text.trim(), context, user);
+      bool isLogin = await AuthApiController.login(context, email: emailController.text, password: passController.text);
       if (isLogin) {
-        Get.off(() => const CategoryScreen());
+        emit(LoginSuccess());
       }
-      emit(LoginSuccess());
     }catch(error){
       print('error in login $error');
       emit(LoginError('$error'));

@@ -2,8 +2,11 @@ import 'package:api2/bloc/bloc_login/login_cubit.dart';
 import 'package:api2/widget/wedget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/getwidget.dart';
+
+import '../category_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -15,7 +18,9 @@ class LoginScreen extends StatelessWidget {
     LoginCubit bloc = LoginCubit.get(context);
     return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {
-        if (state is LoginSuccess) {}
+        if (state is LoginSuccess) {
+          Get.off(() => const CategoryScreen());
+        }
       },
       builder: (context, state) {
         return Scaffold(
