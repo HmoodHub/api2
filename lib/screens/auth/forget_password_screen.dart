@@ -21,7 +21,7 @@ class ForgetPassword extends StatelessWidget {
     return BlocConsumer<ForgetPasswordCubit, ForgetPasswordState>(
       listener: (context, state) {
         if (state is ForgetPasswordSuccess) {
-          Get.to(VerificationCodeScreen());
+          Get.to(VerificationCodeScreen(),arguments: {'email' : bloc.emailController.text});
         }
       },
       builder: (context, state) {

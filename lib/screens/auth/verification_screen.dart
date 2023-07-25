@@ -1,6 +1,7 @@
 import 'package:api2/bloc/bloc_forget_pass/forget_password_cubit.dart';
 import 'package:api2/bloc/bloc_login/login_cubit.dart';
 import 'package:api2/bloc/bloc_verification/verification_code_cubit.dart';
+import 'package:api2/screens/auth/login_screen.dart';
 import 'package:api2/widget/wedget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,23 +22,10 @@ class VerificationCodeScreen extends StatelessWidget {
     ToastContext().init(context);
     VerificationCodeCubit bloc = VerificationCodeCubit.get(context);
     return BlocConsumer<VerificationCodeCubit, VerificationCodeState>(
-
       listener: (context, state) {
         if (state is VerificationCodeSuccess) {
-          toastMessage(
-            msg: 'correct',
-            state: Colors.green,
-            gravity: Toast.bottom,
-          );
+         Get.off(LoginScreen(),arguments: {'email' : bloc.email});
         }
-        if (state is VerificationCodeError) {
-          toastMessage(
-            msg: 'Invalid code, try again',
-            state: Colors.red,
-            gravity: Toast.bottom,
-          );
-        }
-
       },
       builder: (context, state) {
         return Scaffold(
@@ -62,7 +50,7 @@ class VerificationCodeScreen extends StatelessWidget {
                 const SizedBox(
                   height: 30,
                 ),
-                 Row(
+                Row(
                   children: [
                     Expanded(
                       child: TextField(
@@ -72,20 +60,20 @@ class VerificationCodeScreen extends StatelessWidget {
                         keyboardType: TextInputType.number,
                         textAlign: TextAlign.center,
                         decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5)
-                          ),
-                          hintText: "0",
-                          counterText: ''
-                        ),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5)),
+                            hintText: "0",
+                            counterText: ''),
                         onChanged: (value) {
-                          if(value.isNotEmpty){
+                          if (value.isNotEmpty) {
                             bloc.code2.requestFocus();
                           }
                         },
                       ),
                     ),
-                    const SizedBox(width: 5,),
+                    const SizedBox(
+                      width: 5,
+                    ),
                     Expanded(
                       child: TextField(
                         controller: bloc.field2,
@@ -94,19 +82,20 @@ class VerificationCodeScreen extends StatelessWidget {
                         keyboardType: TextInputType.number,
                         textAlign: TextAlign.center,
                         decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5)
-                          ),
-                          hintText: "0",
-                          counterText: ''
-                        ),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5)),
+                            hintText: "0",
+                            counterText: ''),
                         onChanged: (value) {
-                          value.isNotEmpty?
-                          bloc.code3.requestFocus(): bloc.code1.requestFocus();
+                          value.isNotEmpty
+                              ? bloc.code3.requestFocus()
+                              : bloc.code1.requestFocus();
                         },
                       ),
                     ),
-                    const SizedBox(width: 5,),
+                    const SizedBox(
+                      width: 5,
+                    ),
                     Expanded(
                       child: TextField(
                         controller: bloc.field3,
@@ -116,19 +105,19 @@ class VerificationCodeScreen extends StatelessWidget {
                         textAlign: TextAlign.center,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(5)
-                            ),
+                                borderRadius: BorderRadius.circular(5)),
                             hintText: "0",
-                            counterText: ''
-                        ),
+                            counterText: ''),
                         onChanged: (value) {
-                          value.isNotEmpty?
-                            bloc.code4.requestFocus(): bloc.code2.requestFocus();
-
+                          value.isNotEmpty
+                              ? bloc.code4.requestFocus()
+                              : bloc.code2.requestFocus();
                         },
                       ),
                     ),
-                    const SizedBox(width: 5,),
+                    const SizedBox(
+                      width: 5,
+                    ),
                     Expanded(
                       child: TextField(
                         controller: bloc.field4,
@@ -138,13 +127,11 @@ class VerificationCodeScreen extends StatelessWidget {
                         textAlign: TextAlign.center,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(5)
-                            ),
+                                borderRadius: BorderRadius.circular(5)),
                             hintText: "0",
-                            counterText: ''
-                        ),
+                            counterText: ''),
                         onChanged: (value) {
-                          if(value.isEmpty){
+                          if (value.isEmpty) {
                             bloc.code3.requestFocus();
                           }
                         },
@@ -153,12 +140,40 @@ class VerificationCodeScreen extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(
+                  height: 30,
+                ),
+                // password
+                textFormFieldApp(
+                  controller: bloc.password,
+                  type: TextInputType.visiblePassword,
+                  hint: 'New Password',
+                  prefixIcon: Icons.lock,
+                  suffix:
+                      bloc.isVisible ? Icons.visibility_off : Icons.visibility,
+                  obscureText: bloc.obscureText,
+                  onPressedSuffix: () => bloc.visibilityPass(),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                // confirm password
+                textFormFieldApp(
+                  controller: bloc.confirmPassword,
+                  type: TextInputType.visiblePassword,
+                  hint: 'Confirm Password',
+                  prefixIcon: Icons.lock,
+                  suffix:
+                      bloc.isVisible ? Icons.visibility_off : Icons.visibility,
+                  obscureText: bloc.obscureText,
+                  onPressedSuffix: () => bloc.visibilityPass(),
+                ),
+                const SizedBox(
                   height: 40,
                 ),
                 GFButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                     bloc.verification();
+                      bloc.verification(context);
                     }
                   },
                   text: 'Verification',
