@@ -3,11 +3,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 
 enum PrfKeys{
-  loggedIn, token, email, fullName, gender
+  loggedIn, token, email, fullName, gender, code
 }
 class SharedPrfController{
-
-  // THIS IS SINGLTONE CLASS
+  // THIS IS SINGLETON CLASS
   SharedPrfController._();
   static final SharedPrfController _instance =SharedPrfController._();
   late SharedPreferences _sharedPreferences;
@@ -23,11 +22,13 @@ class SharedPrfController{
     _sharedPreferences.setString(PrfKeys.email.toString(), student.email);
     _sharedPreferences.setString(PrfKeys.fullName.toString(), student.fullName);
     _sharedPreferences.setString(PrfKeys.token.toString(), 'Bearer ${student.token}');
-
   }
 
-  bool get loggedIn => _sharedPreferences.getBool(PrfKeys.loggedIn.toString()) ?? false ;
+
+  bool get loggedIn => _sharedPreferences.getBool(PrfKeys.loggedIn.toString()) ?? false;
   String get tokenApp => _sharedPreferences.getString(PrfKeys.token.toString()) ?? "No Token";
+
+
   Future<bool> clear()async{
    return await _sharedPreferences.clear();
   }

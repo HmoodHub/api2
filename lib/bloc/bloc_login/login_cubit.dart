@@ -2,8 +2,6 @@ import 'dart:convert';
 
 import 'package:api2/api/api_controller.dart';
 import 'package:api2/api/auth_api_controller.dart';
-import 'package:api2/model/AuthModel.dart';
-import 'package:api2/model/storage_model.dart';
 import 'package:api2/screens/auth/register_screen.dart';
 import 'package:api2/widget/const_app.dart';
 import 'package:bloc/bloc.dart';

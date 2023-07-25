@@ -4,3 +4,7 @@ part of 'verification_code_cubit.dart';
 abstract class VerificationCodeState {}
 
 class VerificationCodeInitial extends VerificationCodeState {}
+class VerificationCodeLoading extends VerificationCodeState {}
+class VerificationCodeSuccess extends VerificationCodeState {}
+class VerificationCodeError extends VerificationCodeState {}
+

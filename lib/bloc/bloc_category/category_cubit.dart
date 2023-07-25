@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:api2/api/api_controller.dart';
 import 'package:api2/api/auth_api_controller.dart';
-import 'package:api2/model/CategoryModel.dart';
+
 import 'package:api2/widget/const_app.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

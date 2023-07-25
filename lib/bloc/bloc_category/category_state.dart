@@ -8,9 +8,6 @@ abstract class CategoryState {}
 class CategoryInitial extends CategoryState {}
 class CategoryLoading extends CategoryState {}
 class CategoryGetSuccess extends CategoryState {
-  CategoryModel categoryModel ;
-
-  CategoryGetSuccess(this.categoryModel);
 
 }
 class CategoryError extends CategoryState {

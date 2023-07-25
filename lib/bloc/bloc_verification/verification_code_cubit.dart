@@ -1,3 +1,4 @@
+import 'package:api2/prefs/sheared_pref_controller.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,7 +20,7 @@ class VerificationCodeCubit extends Cubit<VerificationCodeState> {
   late FocusNode code3;
   late FocusNode code4;
 
-  void initVerificationScreen(){
+  void initVerificationScreen()async{
     field1 = TextEditingController();
     field4 = TextEditingController();
     field3 = TextEditingController();
@@ -28,6 +29,12 @@ class VerificationCodeCubit extends Cubit<VerificationCodeState> {
     code3 = FocusNode();
     code2 = FocusNode();
     code1 = FocusNode();
+
     emit(VerificationCodeInitial());
+  }
+
+  void verification(){
+    emit(VerificationCodeLoading());
+    String myCode = field1.text+field2.text+field3.text+field4.text;
   }
 }

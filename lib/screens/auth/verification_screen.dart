@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:toast/toast.dart';
 
 import '../category_screen.dart';
 
@@ -17,10 +18,26 @@ class VerificationCodeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ToastContext().init(context);
     VerificationCodeCubit bloc = VerificationCodeCubit.get(context);
     return BlocConsumer<VerificationCodeCubit, VerificationCodeState>(
+
       listener: (context, state) {
-        if (state is ForgetPasswordSuccess) {}
+        if (state is VerificationCodeSuccess) {
+          toastMessage(
+            msg: 'correct',
+            state: Colors.green,
+            gravity: Toast.bottom,
+          );
+        }
+        if (state is VerificationCodeError) {
+          toastMessage(
+            msg: 'Invalid code, try again',
+            state: Colors.red,
+            gravity: Toast.bottom,
+          );
+        }
+
       },
       builder: (context, state) {
         return Scaffold(
@@ -141,7 +158,7 @@ class VerificationCodeScreen extends StatelessWidget {
                 GFButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                     return;
+                     bloc.verification();
                     }
                   },
                   text: 'Verification',
