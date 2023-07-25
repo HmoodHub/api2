@@ -87,4 +87,33 @@ class AuthApiController {
     }
     return false;
   }
+  static Future<bool> forgetPassword(context,{required String email}) async {
+    ToastContext().init(context);
+    var url = Uri.parse(ApiController.forgetPassURL);
+    var response = await http.post(
+      url,
+      body: {
+        'email' : email,
+      },
+    );
+    if (response.statusCode == 200) {
+      print(jsonDecode(response.body)['code']);
+      toastMessage(
+        msg: jsonDecode(response.body)['message'],
+        state: Colors.green,
+        gravity: Toast.bottom,
+      );
+      return true;
+    }else if (response.statusCode == 400) {
+      toastMessage(
+        msg: jsonDecode(response.body)['message'],
+        state: Colors.red,
+        gravity: Toast.bottom,
+      );
+      return false;
+    }else{
+      return false;
+    }
+  }
+
 }

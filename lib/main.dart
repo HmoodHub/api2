@@ -1,6 +1,8 @@
 import 'package:api2/bloc/bloc_category/category_cubit.dart';
+import 'package:api2/bloc/bloc_forget_pass/forget_password_cubit.dart';
 import 'package:api2/bloc/bloc_login/login_cubit.dart';
 import 'package:api2/bloc/bloc_register/register_cubit.dart';
+import 'package:api2/bloc/bloc_verification/verification_code_cubit.dart';
 import 'package:api2/prefs/sheared_pref_controller.dart';
 import 'package:api2/screens/auth/login_screen.dart';
 import 'package:api2/screens/category_screen.dart';
@@ -36,6 +38,12 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => CategoryCubit()..init(),
+        ),
+        BlocProvider(
+          create: (context) => ForgetPasswordCubit()..initForgetScreen()
+        ),
+        BlocProvider(
+            create: (context) => VerificationCodeCubit()..initVerificationScreen()
         ),
       ],
       child: GetMaterialApp(

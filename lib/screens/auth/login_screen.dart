@@ -1,4 +1,5 @@
 import 'package:api2/bloc/bloc_login/login_cubit.dart';
+import 'package:api2/screens/auth/forget_password_screen.dart';
 import 'package:api2/widget/wedget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -64,6 +65,21 @@ class LoginScreen extends StatelessWidget {
                       bloc.isVisible ? Icons.visibility_off : Icons.visibility,
                   obscureText: bloc.obscureText,
                   onPressedSuffix: () => bloc.visibilityPass(),
+                ),
+                const SizedBox(
+                  height: 10,
+                ), 
+                InkWell(
+                  onTap: (){
+                    Get.to(ForgetPassword());
+                  },
+                  child: Text(
+                    'Forget Password?',
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          color: Colors.blue,
+                        ),
+                    textAlign: TextAlign.right,
+                  ),
                 ),
                 const SizedBox(
                   height: 40,

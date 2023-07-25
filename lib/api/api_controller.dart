@@ -7,4 +7,6 @@ class ApiController{
   static const registerURL = '${_apiURL}students/auth/register';
 
   static const logoutURL = '${_apiURL}students/auth/logout';
+  static const forgetPassURL = '${_apiURL}students/auth/forget-password';
+
 }
